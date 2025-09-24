@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>A Plateia é o Maestro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 800% 800%;
+      animation: gradient 12s ease infinite;
+      text-align: center;
+      padding: 40px;
+      color: #fff;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
+
+    p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 15px;
+      padding: 20px 35px;
+      font-size: 1.5em;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .button:hover { transform: scale(1.1); }
+
+    .palma { background-color: #ff6f61; }
+    .risada { background-color: #fbc531; color: #000; }
+    .apito { background-color: #00a8ff; }
+    .tambor { background-color: #9c88ff; }
+    .guerra { background-color: #e84118; }
+    .bateria { background-color: #44bd32; font-size: 1.7em; }
+
+    #output {
+      margin-top: 30px;
+      font-size: 3rem;
+      min-height: 100px;
+      position: relative;
+      overflow: hidden;
+      height: 250px;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2.5rem;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-50px); opacity: 1; }
+      to { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+ <body>
+  <h1>🎶 A Plateia é o Maestro 🎶</h1>
+  <p>Clique e participe do espetáculo!</p>
+
+  
+  <button class="button palma" onclick="playSound('clap','👏')">👏 Palmas</button>
+  <button class="button risada" onclick="playSound('laugh','😂')">😂 Risada</button>
+  <button class="button apito" onclick="playSound('whistle','📯')">📯 Apito</button>
+  <button class="button tambor" onclick="playSound('drum','🥁')">🥁 Tambor</button>
+  <button class="button guerra" onclick="playSound('shout','🎤')">🎤 Grito</button>
+
+  <div style="margin-top:40px;">
+    <button class="button bateria" onclick="baternaTotal()">🔥 Baderna Total 🔥</button>
+  </div>
+
+  
+  <audio id="clap" src="sounds/clap.mp3"></audio>
+  <audio id="laugh" src="sounds/laugh.mp3"></audio>
+  <audio id="shout" src="sounds/shout.mp3"></audio>
+  <audio id="drum" src="sounds/drum.mp3"></audio>
+  <audio id="whistle" src="sounds/whistle.mp3"></audio>
+  <audio id="baderna" src="sounds/baderna.mp3"></audio>
+
+
+  
+  <script>
+    function playSound(id, emoji) {
+      const sound = document.getElementById(id);
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play();
+
+        
+        const elem = document.createElement("div");
+        elem.classList.add("emoji");
+        elem.textContent = emoji;
+        elem.style.left = Math.random() * 90 + "vw";
+        elem.style.top = "0px";
+        document.body.appendChild(elem);
+        setTimeout(() => elem.remove(), 3000);
+      } else {
+        console.error("Som não encontrado: " + id);
+      }
+    }
+
+    
+  function baternaTotal() {
+  
+  const sound = document.getElementById("baderna");
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play();
+  }
+
+  
+  document.getElementById("output").innerHTML = 
+    "🔥 BADERNA TOTAL! 🔥<br>👤👤 Duas pessoas levantam!";
+}
+
+  
+  </script>
+</body>
+</html>
+
+
+  
+  <div id="output"></div>
+
+  
+  <div style="margin-top:50px;">
+    <h2>🕵️ Quem é o Maestro?</h2>
+    <p>Vote em quem você acha que é o maestro verdadeiro!</p>
+    <button class="button palma" onclick="vote('A')">👤 Pessoa A</button>
+    <button class="button tambor" onclick="vote('B')">👤 Pessoa B</button>
+
+    <div id="results" style="margin-top:20px; font-size:1.5rem;">
+      Votos A: 0 | Votos B: 0
+    </div>
+  </div>
+
+  
+  <audio id="clap" src="sounds/clap.mp3"></audio>
+  <audio id="laugh" src="sounds/laugh.mp3"></audio>
+  <audio id="shout" src="sounds/shout.mp3"></audio>
+  <audio id="drum" src="sounds/drum.mp3"></audio>
+  <audio id="whistle" src="sounds/whistle.mp3"></audio>
+  <audio id="chant" src="sounds/chant.mp3"></audio>
+
+  <script>
+    function playSound(id, emoji) {
+      const sound = document.getElementById(id);
+      sound.currentTime = 0;
+      sound.play();
+
+      
+      const elem = document.createElement("div");
+      elem.classList.add("emoji");
+      elem.textContent = emoji;
+      elem.style.left = Math.random() * 90 + "vw";
+      elem.style.top = "0px";
+      document.getElementById("output").appendChild(elem);
+      setTimeout(() => elem.remove(), 3000);
+    }
+
+    function baternaTotal() {
+      document.getElementById("output").innerHTML = "🔥 BATERNA TOTAL! 🔥<br>👤👤 Duas pessoas levantam!";
+    }
+
+    let votes = { A: 0, B: 0 };
+    function vote(person) {
+      votes[person]++;
+      document.getElementById("results").innerHTML =
+        `Votos A: ${votes.A} | Votos B: ${votes.B}`;
+    }
+  </script>
+</body>
+</html>
